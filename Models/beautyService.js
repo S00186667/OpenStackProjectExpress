@@ -11,27 +11,56 @@ import { Product } from "./productModel";
 ];*/
 
 
-function readProduct (req,res,options =[]) {
 
-    Product.find()
+
+function readProducts (req,res)  {
+
+    const{category, id, limit} = req.query; 
+
+    let filter = {}; 
+
+    if(category) {
+        filter.category = {$regex:`${category}$`, $options: 'i' }; 
+    }
+    
+    if(id) {
+        filter.id = id; 
+    }
+
+    const limitNumber = parseInt(limit)
+
+    Product.find(filter)
+    .limit(limitNumber)
+    .then((result) => {
+        res.json(result)
+    })
+    .catch((error) => {
+        res.status(500).json({error: 'An error' + error})
+    })
+
+
+
+        
+}
+
+function readProduct (req,res) {
+
+   /* Product.find()
     .then((result) => {
 
     console.log('book found'); 
     res.json(result)
     })
     .catch((error) =>
-    res.status(500),json({error: 'An error'}))
-    console.log('Finding book'); 
-}
+    res.status(500).json({error: 'An error'}))
+    console.log('Finding book'); */
 
-function readProducts (req,res)  {
     const id = req.params.id;  
     Product.findById(id)
         .then((result) =>
         res.json(result))
         .catch((error) =>
-        res.status(404).json({error: 'not found' }))    
-        
+        res.status(404).json({error: 'not found' })) 
 }
 
 
