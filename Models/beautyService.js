@@ -1,34 +1,48 @@
-import { request } from "express";
+
 import { Product } from "./productModel";
 
-const products =
-[{"name":"THE ORDINARY AHA 30% + BHA 2% PEELING SOLUTION","quantity":5, "id": "isbn001"},
-{"name":"FRECKLE OG ","quantity":5 , "id": "isbn002"},
-{"name":"CERAVE HYDRATING FACIAL CLEANSER","quantity":5,  "id": "isbn003"},
-{"name":"DRUNK ELEPHANT D-BRONZI","quantity":5 , "id": "isbn004"},
-{"name":"FARSÁLI SKINTUNE BLUR PERFECTING PRIMER","quantity":5 , "id": "isbn001"},
-{"name":"E.L.F COSMETICS PORELESS PUTTY PRIMER","quantity":5 , "id": "isbn001"}
-];
+/*const products =
+[{"name":"AHA 30%","Category":"skincare","brand":"The ordinary", "price":30,"id":1100},
+{"name":"FRECKLE OG ","Category": "skincare","brand":"OG", "price":17,"id":1200},
+{"name":"HYDRATING FACIAL CLEANSER","Category": "skincare","brand":"Cerva", "price":15,"id":1300},
+{"name":"D-BRONZI","Category": "skincare","brand":"Drunk Elephant", "price":18,"id":1400},
+{"name":"SKINTUNE BLUR PERFECTING PRIMER","Category": "makeup","brand":"FARSÁLI", "price":50,"id":1500},
+{"name":"PORELESS PUTTY PRIMER","Category": "makeup","brand":"E.L.F", "price":11,"id":1600}
+];*/
 
 
-function readProducts (options = [])  {
-    return products;
+function readProduct (req,res,options =[]) {
+
+    Product.find()
+    .then((result) => {
+
+    console.log('book found'); 
+    res.json(result)
+    })
+    .catch((error) =>
+    res.status(500),json({error: 'An error'}))
+    console.log('Finding book'); 
+}
+
+function readProducts (req,res)  {
+    const id = req.params.id;  
+    Product.findById(id)
+        .then((result) =>
+        res.json(result))
+        .catch((error) =>
+        res.status(404).json({error: 'not found' }))    
+        
 }
 
 
-function readProduct (id, options = []) {
-    return products[id];
-}
 
-function createProduct (product) {
+function createProduct (req,res) {
 
     let productDoc = new Product(req.body); 
     productDoc.save()
     .then((result) => {
         console.log('product saved'); 
-        res.location('/Beauty'+ result_id)
-        .status(201)
-        .json({id: result._id, uri: result.uri})
+        res.status(201).json({id: result._id, uri: `/Beauty/${result.uri}`})
 
     })
   .catch((error)=> {
@@ -38,17 +52,28 @@ function createProduct (product) {
 
 }
 
-function deleteProduct (id) {
-    console.log(`removing beauty product ${products[id].name}`)
+function deleteProduct (req,res) {
 
-    if (id < products.length) {
-        products.splice(id, 1);
-        return products;
-    }
-    else{
-        return false;
-    }
+    const id = req.params.id; 
 
-    };
+    Product.findByIdAndDelete(id). 
+    then((result) => {
+
+        if(result) {
+            res.status(203).send({message : 'deleted'})
+        }
+        else {
+            res.status(404).send({message: 'not found'})
+        }
+
+    })
+
+    .catch((error) =>
+    
+    res.status(404).send({message: 'not found'}));
+    
+    
+
+ }
 
 export default {createProduct, deleteProduct, readProducts, readProduct}
