@@ -52,6 +52,35 @@ function createProduct (req,res) {
 
 }
 
+function updateProduct (req, res)  {
+
+    const id = req.params.id; 
+
+    console.log('updating product' + id) 
+
+
+    //using req.body here remember body parser
+
+    Product.findByIdAndUpdate({_id: id},{...req.body})
+    .then((result) => {
+        if(result) {
+            res.status(200).send({message: 'updated'})
+        }
+        else {
+            res.status(404).send({message: 'not found'})
+        }
+    })
+    .catch((error) => {
+
+        res.status(404).send({message: 'not found' + error})
+    
+    }); 
+
+     
+ }
+
+
+
 function deleteProduct (req,res) {
 
     const id = req.params.id; 
@@ -76,4 +105,7 @@ function deleteProduct (req,res) {
 
  }
 
-export default {createProduct, deleteProduct, readProducts, readProduct}
+
+ 
+
+export default {createProduct, deleteProduct, readProducts, readProduct,updateProduct}
