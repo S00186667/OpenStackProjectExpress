@@ -22,4 +22,4 @@ ProductSchema.virtual('uri').get(function(){
 
 let Product = mongoose.model('Product',ProductSchema); 
 
-export{ Product }
+export{ Product } 
