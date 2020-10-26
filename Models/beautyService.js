@@ -15,7 +15,7 @@ import { Product } from "./productModel";
 
 function readProducts (req,res)  {
 
-    const{category, id, limit} = req.query; 
+    const{category, id, limit, price} = req.query; 
 
     let filter = {}; 
 
@@ -25,6 +25,10 @@ function readProducts (req,res)  {
     
     if(id) {
         filter.id = id; 
+    }
+
+    if(price) {
+        filter.price = price; 
     }
 
     const limitNumber = parseInt(limit)
