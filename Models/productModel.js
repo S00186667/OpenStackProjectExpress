@@ -8,8 +8,8 @@ const ProductSchema = new Schema(
         name:{type: String, required: true}, 
         category:{type: String, required: true}, 
         brand: { type: String, required:true}, 
-        price:{type:Number, required:true}, 
-        id:{type:Number,required:true}
+        price:{type:String, required:true}, 
+        id:{type:String,required:true}
 
     }, 
     {toJSON:{virtuals:true}}

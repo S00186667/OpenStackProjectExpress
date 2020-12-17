@@ -17,9 +17,15 @@
   },
   "homepage": "https://github.com/ITSligo3rdYearWebProgramming/assignementpart1-S00186667#readme",
   "dependencies": {
+    "axios": "^0.21.0",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "mongoose": "^5.10.9",
-    "req": "^0.1.4"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
+    "mongoose-unique-validator": "^2.0.3",
+    "req": "^0.1.4",
+    "ssl": "^1.0.0"
   }
 }
