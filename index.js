@@ -29,7 +29,7 @@ app.get('/Beauty');
 
 //app.get('/', (req, res) => res.send('Hello World isnt life great from Una!'))
 
-const connectionString = 'mongodb://127.0.0.1:27017/UnaAssignment' 
+const connectionString = 'mongodb://127.0.0.1:27017/NewExpressProductdb' 
 
 
 mongoose.connect(connectionString, {

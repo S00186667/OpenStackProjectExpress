@@ -9,7 +9,7 @@ const ProductSchema = new Schema(
         category:{type: String, required: true}, 
         brand: { type: String, required:true}, 
         price:{type:String, required:true}, 
-        id:{type:String,required:true}
+        isbn:{type:String,required:true}
 
     }, 
     {toJSON:{virtuals:true}}

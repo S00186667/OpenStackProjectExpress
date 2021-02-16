@@ -12,10 +12,9 @@ import { Product } from "./productModel";
 
 
 
-
 function readProducts (req,res)  {
 
-    const{category, id, limit, price} = req.query; 
+    const{category, isbn, limit, price} = req.query; 
 
     let filter = {}; 
 
@@ -23,8 +22,8 @@ function readProducts (req,res)  {
         filter.category = {$regex:`${category}$`, $options: 'i' }; 
     }
     
-    if(id) {
-        filter.id = id; 
+    if(isbn) {
+        filter.isbn = isbn; 
     }
 
     if(price) {

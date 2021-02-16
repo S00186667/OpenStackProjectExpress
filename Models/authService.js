@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import crypto  from 'crypto';
-import config from 'config'; 
+import config from '../Routes/config';  
 
 
 let secret =  config.secret; // would normally import this from a config file
@@ -39,6 +39,8 @@ function refresh_token (req, res) {
         res.status(500).send({errors: err});
     }
 };
+
+
 
 // no refresh token needed for facebooklogin that
 // is handled by the facebook auth service.

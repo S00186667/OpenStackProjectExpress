@@ -2,7 +2,7 @@ import express from 'express'
 import VerifyUserMiddleware from '../middleware/verifyuser';
 import ValidationMiddleware from '../middleware/validation'
 import AuthService from '../models/authservice';
-import config from 'config'; 
+import config from '../Routes/config';  
 
 
 let secret =  config.secret; // would normally import this from a config file
