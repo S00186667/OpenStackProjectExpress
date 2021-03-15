@@ -12,7 +12,7 @@ import auth from './Routes/auth';
 
 //const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 
 import beauty from './Routes/Beauty';
 import mongoose from 'mongoose'; 
@@ -29,8 +29,8 @@ app.get('/Beauty');
 
 //app.get('/', (req, res) => res.send('Hello World isnt life great from Una!'))
 
-const connectionString = 'mongodb://127.0.0.1:27017/NewExpressProductdb' 
-
+//const connectionString = 'mongodb://127.0.0.1:27017/NewExpressProductdb' 
+const connectionString = 'mongodb://127.0.0.1:27017/AllProducts'
 
 mongoose.connect(connectionString, {
   "useNewUrlParser": true,
